@@ -45,8 +45,8 @@
       --color-texto: #F5F2ED;        /* Blanco cálido brand — texto principal */
       --color-texto-suave: #8A8580;  /* Gris cálido — texto secundario */
       --color-exito: #4CAF50;        /* Verde — tarea completada */
-      --fuente: 'DM Sans', system-ui, sans-serif; /* Tipografía brand */
-      --fuente-titulo: 'Syne', sans-serif; /* Tipografía títulos brand */
+      --fuente: 'DM Sans', system-ui, sans-serif;
+      --fuente-titulo: 'Syne', sans-serif;
       --radio: 12px;                 /* Redondez de las esquinas */
     }
 
@@ -110,7 +110,7 @@
 
     .hero-badge {
       display: inline-block;
-      background: rgba(201, 168, 76, 0.15);
+      background: rgba(201, 168, 76, 0.15); /* rgba permite color con transparencia */
       border: 1px solid rgba(201, 168, 76, 0.4);
       color: var(--color-oro);
       padding: 6px 16px;
@@ -323,7 +323,7 @@
 
     /* El "por qué importa" — bloque destacado */
     .tarea-porque {
-      background: rgba(245, 158, 11, 0.07);
+      background: rgba(201, 168, 76, 0.07);
       border-left: 3px solid var(--color-oro);
       /* border-left pone el borde solo del lado izquierdo — efecto de cita */
       padding: 12px 16px;
@@ -404,6 +404,39 @@
       margin-bottom: 8px;
     }
 
+    /* Acordeón desplegable */
+    details.acordeon {
+      background: var(--color-borde);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    details.acordeon summary {
+      cursor: pointer;
+      padding: 14px 18px;
+      font-weight: 600;
+      color: var(--color-oro);
+      font-size: 0.95rem;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+    }
+    details.acordeon summary::after {
+      content: '▶';
+      margin-left: auto;
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+      color: var(--color-texto-suave);
+    }
+    details.acordeon[open] summary::after {
+      transform: rotate(90deg);
+    }
+    details.acordeon .acordeon-contenido {
+      padding: 0 18px 18px;
+    }
+
     /* Nota especial dentro de una tarea */
     .tarea-nota {
       background: rgba(99, 102, 241, 0.1);
@@ -426,13 +459,13 @@
       text-decoration: none;
       margin-top: 12px;
       padding: 8px 14px;
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      border: 1px solid rgba(201, 168, 76, 0.3);
       border-radius: 6px;
       transition: background 0.2s ease;
     }
 
     .tarea-link:hover {
-      background: rgba(245, 158, 11, 0.1);
+      background: rgba(201, 168, 76, 0.1);
     }
 
     /* --- CHECKBOX DE COMPLETADO --- */
@@ -521,48 +554,80 @@
       margin-top: 32px;
     }
 
+    /* --- MEDIA DE TAREA (imagen o video complementario) ---
+       Este bloque aparece entre el "por qué importa" y los pasos.
+       Soporta imagen directa o embed de YouTube. */
+    .tarea-media {
+      margin: 16px 0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .tarea-img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      object-fit: cover;
+      /* object-fit: cover recorta la imagen para que llene el espacio
+         sin distorsionarse, como "background-size: cover" en CSS. */
+    }
+
+    /* Wrapper para video YouTube en proporción 16:9.
+       El truco padding-bottom: 56.25% crea un espacio proporcional
+       al ancho del contenedor, sin importar el tamaño de pantalla. */
+    .tarea-video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #000;
+    }
+
+    .tarea-video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
     /* ============================================================
        RESPONSIVE — Ajustes para pantallas pequeñas
        @media es una "condición": aplica estos estilos SOLO SI
        el ancho de pantalla es menor a 600px.
     ============================================================ */
-    /* ============================================================
-       RESPONSIVE — TABLET (hasta 768px)
-       @media aplica reglas SOLO si la pantalla cumple la condición.
-       Aquí cambiamos cosas para tablets (iPad, etc.)
-    ============================================================ */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.6rem; }
+      .tarea { padding: 18px; }
+      .tarea-meta { flex-direction: column; }
+    }
+
+
+    h1, h2, h3, h4 {
+      font-family: var(--fuente-titulo);
+      font-weight: 800;
+    }
+
     @media (max-width: 768px) {
       .contenido-principal { padding: 32px 16px; }
       .hero { padding: 48px 16px 32px; }
       .hero h1 { font-size: 2rem; }
     }
 
-    /* ============================================================
-       RESPONSIVE — MÓVIL (hasta 480px)
-       Pantallas pequeñas: ajustamos tamaños, padding y dirección.
-    ============================================================ */
     @media (max-width: 480px) {
-      /* Títulos más pequeños en celular */
       .hero h1 { font-size: 1.6rem; }
       .hero-subtitulo { font-size: 1rem; }
-
-      /* Menos espacio interior para aprovechar la pantalla */
       .hero { padding: 36px 16px 28px; }
       .contenido-principal { padding: 24px 12px; }
       .tarea { padding: 18px 14px; }
       .progreso-seccion { padding: 16px 12px; }
-
-      /* En móvil, el meta de la tarea se apila verticalmente */
       .tarea-meta { flex-direction: column; gap: 8px; }
-
-      /* Los pasos también se apilan */
       .fase-header { flex-wrap: wrap; }
-
-      /* Texto ligeramente más pequeño para que entre bien */
       .tarea-descripcion { font-size: 0.9rem; }
       .paso { font-size: 0.9rem; }
     }
-
   </style>
 </head>
 
@@ -582,6 +647,7 @@
         Esta guía existe para que no pierdas tiempo ni dinero dando pasos en falso.
       </p>
       <p class="hero-autor">Guía de Inicio Rápido · Plataforma: JifuLive · jifulive.com</p>
+      <img src="images/jifulive-hero.jpg" alt="Plataforma JifuLive" style="width:100%;max-width:600px;border-radius:12px;margin-top:24px;border:2px solid var(--color-oro);">
     </div>
   </div>
 
@@ -637,28 +703,42 @@
             es ruido.
           </div>
 
+          <div class="tarea-media">
+            <img class="tarea-img" src="images/intensivo-basico.jpg" alt="Intensivo Básico con Mario Balsas">
+          </div>
+
           <p class="pasos-titulo">Cómo acceder</p>
 
-          <div class="pasos-grupo">
-            <span class="pasos-grupo-label">📱 Desde tu celular</span>
-            <ol class="pasos">
-              <li>Ingresa a jifulive.com</li>
-              <li>Abre el menú lateral (las tres rayas horizontales ≡)</li>
-              <li>Cambia el idioma a Español</li>
-              <li>Selecciona "Aprendizaje en vivo"</li>
-              <li>Busca a Mario Balsas → Cursos → Intensivo Básico</li>
-            </ol>
-          </div>
+          <details class="acordeon">
+            <summary>📱 Desde tu celular</summary>
+            <div class="acordeon-contenido">
+              <div class="tarea-video-wrapper">
+                <iframe src="https://www.youtube.com/embed/RmiFXtQoPVc" allowfullscreen loading="lazy"></iframe>
+              </div>
+              <ol class="pasos">
+                <li>Ingresa a jifulive.com</li>
+                <li>Abre el menú lateral (las tres rayas horizontales ≡)</li>
+                <li>Cambia el idioma a Español</li>
+                <li>Selecciona "Aprendizaje en vivo"</li>
+                <li>Busca a Mario Balsas → Cursos → Intensivo Básico</li>
+              </ol>
+            </div>
+          </details>
 
-          <div class="pasos-grupo">
-            <span class="pasos-grupo-label">💻 Desde computadora o tablet</span>
-            <ol class="pasos">
-              <li>Ingresa a jifulive.com</li>
-              <li>Cambia el idioma (esquina superior derecha)</li>
-              <li>Selecciona FOREX → Aprendizaje en vivo</li>
-              <li>Mario Balsas → Cursos → Intensivo Básico</li>
-            </ol>
-          </div>
+          <details class="acordeon">
+            <summary>💻 Desde computadora o tablet</summary>
+            <div class="acordeon-contenido">
+              <div class="tarea-video-wrapper">
+                <iframe src="https://www.youtube.com/embed/YEtZ2Fi0tsQ" allowfullscreen loading="lazy"></iframe>
+              </div>
+              <ol class="pasos">
+                <li>Ingresa a jifulive.com</li>
+                <li>Cambia el idioma (esquina superior derecha)</li>
+                <li>Selecciona FOREX → Aprendizaje en vivo</li>
+                <li>Mario Balsas → Cursos → Intensivo Básico</li>
+              </ol>
+            </div>
+          </details>
 
           <div class="tarea-nota">
             💡 <strong>Tu meta:</strong> Terminar el intensivo completo antes de avanzar.
@@ -689,6 +769,12 @@
             Si no la tienes instalada, operas a ciegas.
           </div>
 
+          <div class="tarea-media">
+            <div class="tarea-video-wrapper">
+              <iframe src="https://www.youtube.com/embed/8LDIOP9Umrg" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+
           <p class="pasos-titulo">Qué hacer</p>
           <ol class="pasos">
             <li>Descarga JIFU Connect en tu celular (App Store o Google Play)</li>
@@ -717,6 +803,14 @@
             MT5 es el campo de batalla. Cada trader profesional opera desde aquí.
             Primero la conoces en modo demo — sin riesgo real — hasta que la dominas.
             Papel y pluma en mano: esta sesión tiene mucho que anotar.
+          </div>
+
+          <div class="tarea-media">
+            <img class="tarea-img" src="images/mt5-logo.png" alt="MetaTrader 5 MT5" style="max-width:180px;">
+            <img class="tarea-img" src="images/mt5-descarga.gif" alt="Cómo descargar MetaTrader 5" style="margin-top:16px;">
+            <div class="tarea-video-wrapper" style="margin-top:16px;">
+              <iframe src="https://www.youtube.com/embed/bmfqk0ZwKeA" allowfullscreen loading="lazy"></iframe>
+            </div>
           </div>
 
           <p class="pasos-titulo">Qué hacer</p>
@@ -765,6 +859,10 @@
             enviar a tu líder — ese paso confirma que entiendes los fundamentos.
           </div>
 
+          <div class="tarea-media">
+            <img class="tarea-img" src="images/glosario-manual.jpg" alt="Glosario y Manual Operativo">
+          </div>
+
           <p class="pasos-titulo">Qué hacer</p>
           <ol class="pasos">
             <li>Descarga el documento desde Google Drive</li>
@@ -800,6 +898,12 @@
             exponerlo. Es el seguro de vida de tu cuenta.
           </div>
 
+          <div class="tarea-media">
+            <div class="tarea-video-wrapper">
+              <iframe src="https://www.youtube.com/embed/lBbzPv59v04" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>
+
           <p class="pasos-titulo">Qué hacer</p>
           <ol class="pasos">
             <li>Ve el video de gestión de riesgo disponible en JifuLive</li>
@@ -832,6 +936,12 @@
             Puedes tener la mejor estrategia del mundo y arruinarla con una mala
             ejecución. Este video te muestra la mecánica exacta para colocar
             órdenes en MT5 sin errores.
+          </div>
+
+          <div class="tarea-media">
+            <div class="tarea-video-wrapper">
+              <iframe src="https://www.youtube.com/embed/dHRFiDbbfpQ" allowfullscreen loading="lazy"></iframe>
+            </div>
           </div>
 
           <p class="pasos-titulo">Qué hacer</p>
@@ -878,6 +988,7 @@
           <div class="tarea-divider"></div>
 
           <div class="pasos-grupo">
+            <img src="images/ivoox-logo.webp" alt="Ivoox" style="height:40px;margin-bottom:10px;">
             <span class="pasos-grupo-label">📻 IVOOX — Audiolibro</span>
             <ol class="pasos">
               <li>Descarga la app IVOOX</li>
@@ -887,6 +998,7 @@
           </div>
 
           <div class="pasos-grupo">
+            <img src="images/mixlr-logo.webp" alt="Mixlr" style="height:40px;margin-bottom:10px;">
             <span class="pasos-grupo-label">🎙️ MIXLR — Comunidad en vivo</span>
             <ol class="pasos">
               <li>Descarga la app MIXLR y crea tu cuenta</li>
@@ -929,6 +1041,10 @@
             No avances hasta que puedas explicarla con tus propias palabras.
           </div>
 
+          <div class="tarea-media">
+            <img class="tarea-img" src="images/estrategia-orb.jpg" alt="Estrategia ORB Opening Range Breakout">
+          </div>
+
           <p class="pasos-titulo">Ritmo de estudio sugerido</p>
           <ol class="pasos">
             <li>Día 1: ORB 1 + Fundamentos</li>
@@ -966,6 +1082,10 @@
             inmediata de lo que aprendiste en ORB.
           </div>
 
+          <div class="tarea-media">
+            <img class="tarea-img" src="images/fundamentos-jona.jpg" alt="Fundamentos para Operar con JONA">
+          </div>
+
           <p class="pasos-titulo">Qué hacer</p>
           <ol class="pasos">
             <li>Accede a la serie de videos de JONA en JifuLive</li>
@@ -999,6 +1119,10 @@
             especialmente en oro (XAUUSD). Desarrolla el criterio para identificar
             zonas clave antes de que el mercado llegue a ellas. Paciencia y
             consistencia son el resultado de este entrenamiento.
+          </div>
+
+          <div class="tarea-media">
+            <img class="tarea-img" src="images/teoria-cuartos.jpg" alt="Teoría de Cuartos XAUUSD">
           </div>
 
           <p class="pasos-titulo">Qué hacer</p>
@@ -1042,6 +1166,14 @@
             que aprenderla bajo presión.
           </div>
 
+          <!-- MEDIA TAREA 11 -->
+          <div class="tarea-media">
+            <!-- <img class="tarea-img" src="RUTA_O_URL_IMAGEN" alt="Instala Binance"> -->
+            <!-- <div class="tarea-video-wrapper">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen loading="lazy"></iframe>
+            </div> -->
+          </div>
+
           <p class="pasos-titulo">Qué hacer</p>
           <ol class="pasos">
             <li>Descarga Binance (App Store o Google Play)</li>
@@ -1070,6 +1202,14 @@
             UglyCash cierra el círculo del ecosistema de pagos JIFU.
             Con esta app instalada y configurada, tienes todo lo que necesitas
             para operar, cobrar y crecer dentro del sistema.
+          </div>
+
+          <!-- MEDIA TAREA 12 -->
+          <div class="tarea-media">
+            <!-- <img class="tarea-img" src="RUTA_O_URL_IMAGEN" alt="Instala UglyCash"> -->
+            <!-- <div class="tarea-video-wrapper">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen loading="lazy"></iframe>
+            </div> -->
           </div>
 
           <p class="pasos-titulo">Qué hacer</p>
@@ -1214,8 +1354,3 @@
 
 </body>
 </html>
-
-    h1, h2, h3, h4 {
-      font-family: var(--fuente-titulo);
-      font-weight: 800;
-    }
