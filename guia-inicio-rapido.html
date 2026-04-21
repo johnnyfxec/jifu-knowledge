@@ -85,7 +85,7 @@
        SECCIÓN HERO — El gran encabezado
     ============================================================ */
     .hero {
-      background: linear-gradient(135deg, #0a0e1a 0%, #1a1f35 50%, #0a0e1a 100%);
+      background: linear-gradient(135deg, var(--color-fondo) 0%, #1A1A1A 50%, var(--color-fondo) 100%);
       /* linear-gradient crea un degradado. 135deg es el ángulo.
          Los porcentajes son los puntos de transición de color. */
       border-bottom: 1px solid var(--color-borde);
@@ -110,8 +110,8 @@
 
     .hero-badge {
       display: inline-block;
-      background: rgba(245, 158, 11, 0.15); /* rgba permite color con transparencia */
-      border: 1px solid rgba(245, 158, 11, 0.4);
+      background: rgba(201, 168, 76, 0.15);
+      border: 1px solid rgba(201, 168, 76, 0.4);
       color: var(--color-oro);
       padding: 6px 16px;
       border-radius: 999px; /* 999px en border-radius = cápsula perfecta */
@@ -223,8 +223,8 @@
     }
 
     .fase-numero {
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      background: rgba(201, 168, 76, 0.15);
+      border: 1px solid rgba(201, 168, 76, 0.3);
       color: var(--color-oro);
       font-size: 0.7rem;
       font-weight: 700;
@@ -260,7 +260,7 @@
 
     .tarea:hover {
       /* :hover aplica estilos cuando el cursor está encima */
-      border-color: rgba(245, 158, 11, 0.3);
+      border-color: rgba(201, 168, 76, 0.3);
       transform: translateY(-2px);
       /* translateY mueve el elemento verticalmente. -2px = sube 2 píxeles.
          Combinado con transition, da el efecto de "levantarse" al pasar el cursor. */
@@ -268,7 +268,7 @@
 
     /* Cuando la tarea está completada, cambia su borde a verde */
     .tarea.completada {
-      border-color: rgba(16, 185, 129, 0.3);
+      border-color: rgba(76, 175, 80, 0.3);
       opacity: 0.75;
     }
 
@@ -526,10 +526,41 @@
        @media es una "condición": aplica estos estilos SOLO SI
        el ancho de pantalla es menor a 600px.
     ============================================================ */
-    @media (max-width: 600px) {
+    /* ============================================================
+       RESPONSIVE — TABLET (hasta 768px)
+       @media aplica reglas SOLO si la pantalla cumple la condición.
+       Aquí cambiamos cosas para tablets (iPad, etc.)
+    ============================================================ */
+    @media (max-width: 768px) {
+      .contenido-principal { padding: 32px 16px; }
+      .hero { padding: 48px 16px 32px; }
+      .hero h1 { font-size: 2rem; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — MÓVIL (hasta 480px)
+       Pantallas pequeñas: ajustamos tamaños, padding y dirección.
+    ============================================================ */
+    @media (max-width: 480px) {
+      /* Títulos más pequeños en celular */
       .hero h1 { font-size: 1.6rem; }
-      .tarea { padding: 18px; }
-      .tarea-meta { flex-direction: column; }
+      .hero-subtitulo { font-size: 1rem; }
+
+      /* Menos espacio interior para aprovechar la pantalla */
+      .hero { padding: 36px 16px 28px; }
+      .contenido-principal { padding: 24px 12px; }
+      .tarea { padding: 18px 14px; }
+      .progreso-seccion { padding: 16px 12px; }
+
+      /* En móvil, el meta de la tarea se apila verticalmente */
+      .tarea-meta { flex-direction: column; gap: 8px; }
+
+      /* Los pasos también se apilan */
+      .fase-header { flex-wrap: wrap; }
+
+      /* Texto ligeramente más pequeño para que entre bien */
+      .tarea-descripcion { font-size: 0.9rem; }
+      .paso { font-size: 0.9rem; }
     }
 
   </style>
