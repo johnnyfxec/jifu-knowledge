@@ -1,0 +1,6 @@
+*.json
+*.txt
+*.py
+*.sh
+*.log
+__pycache__/

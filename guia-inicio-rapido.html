@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía de Inicio Rápido — JIFU Trading · johnnyfxec</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --negro: #0A0A0A;
+      --blanco: #F5F2ED;
+      --dorado: #C9A84C;
+      --dorado-claro: #E8C97A;
+      --gris: #6B6B6B;
+      --gris-claro: #E8E4DE;
+      --exito: #4CAF50;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--blanco);
+      color: var(--negro);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── COVER ─────────────────────────────────────────────────── */
+    .cover {
+      min-height: 100vh;
+      background: var(--negro);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cover-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .cover-mark {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: var(--dorado);
+    }
+
+    .cover-year {
+      font-size: 13px; letter-spacing: 2px;
+      color: var(--gris);
+    }
+
+    .cover-center {
+      flex: 1;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .cover-eyebrow {
+      font-size: 12px; letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 24px;
+    }
+
+    .cover-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(56px, 9vw, 120px);
+      font-weight: 800;
+      color: var(--blanco);
+      line-height: 0.95;
+      letter-spacing: -3px;
+    }
+
+    .cover-name span { color: var(--dorado); }
+
+    .cover-subtitle {
+      margin-top: 32px;
+      font-size: 18px; font-weight: 300;
+      color: rgba(245,242,237,0.5);
+      max-width: 500px; line-height: 1.7;
+    }
+
+    .cover-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      position: relative;
+    }
+
+    .cover-doc-info {
+      font-size: 12px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gris);
+    }
+
+    .cover-tasks {
+      font-family: 'Syne', sans-serif;
+      font-size: 56px; font-weight: 800;
+      color: rgba(245,242,237,0.05);
+      letter-spacing: -2px;
+    }
+
+    /* ── PROGRESO STICKY ────────────────────────────────────────── */
+    .progreso-wrap {
+      background: var(--negro);
+      border-bottom: 1px solid rgba(245,242,237,0.08);
+      padding: 20px 60px;
+      position: sticky; top: 0; z-index: 100;
+    }
+
+    .progreso-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; gap: 24px;
+    }
+
+    .progreso-label {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gris); white-space: nowrap;
+    }
+
+    .progreso-barra-wrap {
+      flex: 1;
+      background: rgba(245,242,237,0.08);
+      border-radius: 999px; height: 4px;
+      overflow: hidden;
+    }
+
+    .progreso-barra {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--dorado), var(--dorado-claro));
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+
+    .progreso-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px; font-weight: 700;
+      color: var(--dorado); white-space: nowrap;
+    }
+
+    /* ── FASES ──────────────────────────────────────────────────── */
+    .fase-wrap {
+      padding: 80px 60px;
+    }
+
+    .fase-wrap.dark {
+      background: var(--negro);
+    }
+
+    .fase-inner {
+      max-width: 1100px; margin: 0 auto;
+    }
+
+    .fase-header {
+      display: flex; align-items: center; gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .fase-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 5px; text-transform: uppercase;
+      color: var(--dorado);
+      white-space: nowrap;
+    }
+
+    .fase-titulo {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800; letter-spacing: -1.5px;
+      line-height: 1.05;
+      color: var(--negro);
+    }
+
+    .fase-wrap.dark .fase-titulo { color: var(--blanco); }
+
+    .fase-linea {
+      flex: 1; height: 1px;
+      background: var(--gris-claro);
+    }
+
+    .fase-wrap.dark .fase-linea {
+      background: rgba(245,242,237,0.1);
+    }
+
+    /* ── GRID DE TAREAS ─────────────────────────────────────────── */
+    .tareas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2px;
+      background: var(--gris-claro);
+    }
+
+    .fase-wrap.dark .tareas-grid {
+      background: rgba(245,242,237,0.08);
+    }
+
+    /* ── TARJETA DE TAREA ───────────────────────────────────────── */
+    .tarea {
+      background: var(--blanco);
+      padding: 40px 36px;
+      transition: background 0.2s ease;
+      cursor: default;
+    }
+
+    .fase-wrap.dark .tarea {
+      background: var(--negro);
+    }
+
+    .tarea.completada {
+      opacity: 0.65;
+    }
+
+    .tarea-top {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; margin-bottom: 24px;
+    }
+
+    .tarea-num-badge {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--dorado);
+    }
+
+    .tarea-tiempo {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--gris);
+      background: var(--gris-claro);
+      padding: 4px 10px; border-radius: 2px;
+    }
+
+    .fase-wrap.dark .tarea-tiempo {
+      background: rgba(245,242,237,0.08);
+      color: rgba(245,242,237,0.4);
+    }
+
+    .tarea-icono {
+      font-size: 2rem; margin-bottom: 16px;
+    }
+
+    .tarea-titulo {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -0.5px; line-height: 1.15;
+      margin-bottom: 8px;
+      color: var(--negro);
+    }
+
+    .fase-wrap.dark .tarea-titulo { color: var(--blanco); }
+
+    .tarea-hook {
+      font-size: 14px; font-weight: 300;
+      font-style: italic;
+      color: var(--dorado);
+      margin-bottom: 20px;
+    }
+
+    .tarea-porque {
+      font-size: 14px; font-weight: 300;
+      color: var(--gris); line-height: 1.8;
+      border-left: 3px solid var(--dorado);
+      padding-left: 16px;
+      margin-bottom: 24px;
+    }
+
+    .fase-wrap.dark .tarea-porque {
+      color: rgba(245,242,237,0.5);
+    }
+
+    .tarea-divider {
+      height: 1px;
+      background: var(--gris-claro);
+      margin: 20px 0;
+    }
+
+    .fase-wrap.dark .tarea-divider {
+      background: rgba(245,242,237,0.08);
+    }
+
+    .pasos-label {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gris); margin-bottom: 12px;
+    }
+
+    .pasos-grupo { margin-bottom: 20px; }
+
+    .pasos-grupo-label {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--dorado);
+      display: block; margin-bottom: 10px;
+    }
+
+    .pasos {
+      list-style: none;
+      counter-reset: paso;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    .pasos li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14px; font-weight: 300;
+      color: var(--gris); line-height: 1.6;
+      counter-increment: paso;
+    }
+
+    .fase-wrap.dark .pasos li {
+      color: rgba(245,242,237,0.5);
+    }
+
+    .pasos li::before {
+      content: counter(paso);
+      min-width: 22px; height: 22px;
+      background: var(--gris-claro);
+      color: var(--dorado);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .fase-wrap.dark .pasos li::before {
+      background: rgba(245,242,237,0.08);
+    }
+
+    .tarea-nota {
+      font-size: 13px; font-weight: 400;
+      color: var(--gris); line-height: 1.7;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 12px 16px; border-radius: 2px;
+      margin-top: 16px;
+    }
+
+    .fase-wrap.dark .tarea-nota {
+      color: rgba(245,242,237,0.5);
+      background: rgba(201,168,76,0.06);
+    }
+
+    .tarea-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--dorado); font-size: 13px; font-weight: 500;
+      letter-spacing: 1px;
+      text-decoration: none;
+      border: 1px solid rgba(201,168,76,0.35);
+      padding: 8px 16px; margin-top: 16px;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+
+    .tarea-link:hover {
+      background: rgba(201,168,76,0.1);
+    }
+
+    /* Media */
+    .tarea-media { margin: 16px 0; overflow: hidden; border-radius: 2px; }
+    .tarea-img { width: 100%; display: block; object-fit: cover; }
+    .tarea-video-wrapper {
+      position: relative; padding-bottom: 56.25%;
+      height: 0; overflow: hidden; background: #000;
+    }
+    .tarea-video-wrapper iframe {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; border: none;
+    }
+
+    /* Checkbox */
+    .tarea-check-area {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: 28px; padding-top: 20px;
+      border-top: 1px solid var(--gris-claro);
+      cursor: pointer;
+    }
+
+    .fase-wrap.dark .tarea-check-area {
+      border-top-color: rgba(245,242,237,0.08);
+    }
+
+    .tarea-check-area input { display: none; }
+
+    .checkbox-custom {
+      width: 22px; height: 22px;
+      border: 2px solid var(--gris-claro);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; flex-shrink: 0;
+    }
+
+    .fase-wrap.dark .checkbox-custom {
+      border-color: rgba(245,242,237,0.2);
+    }
+
+    .checkbox-custom.marcado {
+      background: var(--exito);
+      border-color: var(--exito);
+    }
+
+    .checkbox-custom.marcado::after {
+      content: '✓'; color: white;
+      font-size: 12px; font-weight: 700;
+    }
+
+    .check-label {
+      font-size: 13px; font-weight: 300;
+      color: var(--gris); user-select: none;
+      letter-spacing: 0.5px;
+    }
+
+    .fase-wrap.dark .check-label {
+      color: rgba(245,242,237,0.35);
+    }
+
+    /* ── CIERRE ─────────────────────────────────────────────────── */
+    .cierre {
+      background: var(--negro);
+      padding: 100px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cierre::before {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 70%);
+    }
+
+    .cierre-inner {
+      max-width: 700px; margin: 0 auto;
+      position: relative;
+    }
+
+    .cierre-eyebrow {
+      font-size: 11px; letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--dorado); margin-bottom: 24px;
+    }
+
+    .cierre-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 800; letter-spacing: -3px;
+      line-height: 0.95;
+      color: var(--blanco);
+      margin-bottom: 28px;
+    }
+
+    .cierre-title span { color: var(--dorado); }
+
+    .cierre-sub {
+      font-size: 17px; font-weight: 300;
+      color: rgba(245,242,237,0.45);
+      line-height: 1.8; margin-bottom: 48px;
+    }
+
+    .cierre-marca {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 5px; text-transform: uppercase;
+      color: var(--gris);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 700px) {
+      .cover { padding: 36px 24px; }
+      .progreso-wrap { padding: 16px 24px; }
+      .fase-wrap { padding: 60px 24px; }
+      .tarea { padding: 28px 24px; }
+      .cierre { padding: 80px 24px; }
+      .tareas-grid { grid-template-columns: 1fr; }
+      .cover-name { letter-spacing: -2px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── COVER ──────────────────────────────────────────────────────── -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="cover-mark">johnnyfxec · JIFU Trading</div>
+    <div class="cover-year">2026</div>
+  </div>
+  <div class="cover-center">
+    <div class="cover-eyebrow">Guía de Inicio Rápido</div>
+    <div class="cover-name">TU CAMINO<br>A LA <span>LIBERTAD</span><br>FINANCIERA.</div>
+    <div class="cover-subtitle">12 tareas. Una sola dirección. Sin atajos, sin excusas. Esta guía existe para que no pierdas tiempo ni dinero dando pasos en falso.</div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-doc-info">Plataforma: JifuLive · jifulive.com</div>
+    <div class="cover-tasks">12</div>
+  </div>
+</div>
+
+<!-- ── PROGRESO STICKY ─────────────────────────────────────────────── -->
+<div class="progreso-wrap">
+  <div class="progreso-inner">
+    <span class="progreso-label">Tu progreso</span>
+    <div class="progreso-barra-wrap">
+      <div class="progreso-barra" id="barra"></div>
+    </div>
+    <span class="progreso-num" id="contador">0 / 12</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     FASE 1 — ENCIENDE EL MOTOR
+═══════════════════════════════════════════════════════════════════ -->
+<div class="fase-wrap">
+  <div class="fase-inner">
+    <div class="fase-header">
+      <span class="fase-num">Fase 01</span>
+      <h2 class="fase-titulo">Enciende el motor</h2>
+      <div class="fase-linea"></div>
+    </div>
+    <div class="tareas-grid">
+
+      <!-- TAREA 1 -->
+      <div class="tarea" id="tarea-1">
+        <div class="tarea-top">
+          <span class="tarea-num-badge">Tarea 01</span>
+          <span class="tarea-tiempo">3–5 horas</span>
+        </div>
+        <div class="tarea-icono">🎓</div>
+        <div class="tarea-titulo">Intensivo Básico con Mario Balsas</div>
+        <div class="tarea-hook">"No se puede construir sobre arena."</div>
+        <div class="tarea-porque">Antes de tocar un solo dólar del mercado, necesitas hablar su idioma. Mario Balsas construyó este intensivo para darte en horas lo que a otros les tomó años descubrir a golpe de pérdidas. Sin esta base, todo lo demás es ruido.</div>
+        <div class="tarea-media">
+          <!-- <img class="tarea-img" src="" alt="Intensivo Básico Mario Balsas"> -->
+          <!-- <div class="tarea-video-wrapper"><iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen loading="lazy"></iframe></div> -->
+        </div>
+        <div class="tarea-divider"></div>
+        <div class="pasos-grupo">
+          <span class="pasos-grupo-label">📱 Desde tu celular</span>
+          <ol class="pasos">
+            <li>Ingresa a jifulive.com</li>
+            <li>Abre el menú lateral (≡) y cambia el idioma a Español</li>
+            <li>Selecciona "Aprendizaje en vivo"</li>
+            <li>Mario Balsas → Cursos → Intensivo Básico</li>
+          </ol>
+        </div>
+        <div class="pasos-grupo">
+          <span class="pasos-grupo-label">💻 Desde computadora</span>
+          <ol class="pasos">
+            <li>Ingresa a jifulive.com y cambia el idioma (esquina superior derecha)</li>
+            <li>Selecciona FOREX → Aprendizaje en vivo</li>
+            <li>Mario Balsas → Cursos → Intensivo Básico</li>
+          </ol>
+        </div>
+        <div class="tarea-nota">💡 <strong>Tu meta:</strong> Terminar el intensivo completo antes de avanzar. No saltes pasos.</div>
+        <label class="tarea-check-area" onclick="marcarTarea(1)">
+          <div class="checkbox-custom" id="check-1"></div>
+          <span class="check-label">Marcar como completada</span>
+        </label>
+      </div>
+
+      <!-- TAREA 2 -->
+      <div class="tarea" id="tarea-2">
+        <div class="tarea-top">
+          <span class="tarea-num-badge">Tarea 02</span>
+          <span class="tarea-tiempo">15 min</span>
+        </div>
+        <div class="tarea-icono">🔔</div>
+        <div class="tarea-titulo">JIFU Connect</div>
+        <div class="tarea-hook">"La información en tiempo real vale más que cualquier análisis tardío."</div>
+        <div class="tarea-porque">Esta app es tu línea directa con el mercado y con los profesores. Aquí llegan las alertas de trading cuando el setup está listo. Si no la tienes instalada, operas a ciegas.</div>
+        <div class="tarea-media">
+          <!-- <img class="tarea-img" src="" alt="JIFU Connect"> -->
+        </div>
+        <div class="tarea-divider"></div>
+        <span class="pasos-label">Qué hacer</span>
+        <ol class="pasos">
+          <li>Descarga JIFU Connect (App Store o Google Play)</li>
+          <li>Activa las notificaciones — son la razón de ser de la app</li>
+          <li>Explora la interfaz y familiarízate</li>
+        </ol>
+        <label class="tarea-check-area" onclick="marcarTarea(2)">
+          <div class="checkbox-custom" id="check-2"></div>
+          <span class="check-label">Marcar como completada</span>
+        </label>
+      </div>
+
+      <!-- TAREA 3 -->
+      <div class="tarea" id="tarea-3">
+        <div class="tarea-top">
+          <span class="tarea-num-badge">Tarea 03</span>
+          <span class="tarea-tiempo">2–3 horas</span>
+        </div>
+        <div class="tarea-icono">📊</div>
+        <div class="tarea-titulo">MetaTrader 5 (MT5)</div>
+        <div class="tarea-hook">"Tu herramienta de trabajo diario. Conócela como la palma de tu mano."</div>
+        <div class="tarea-porque">MT5 es el campo de batalla. Cada trader profesional opera desde aquí. Primero la conoces en modo demo — sin riesgo real — hasta que la dominas. Papel y pluma en mano: esta sesión tiene mucho que anotar.</div>
+        <div class="tarea-media">
+          <!-- <img class="tarea-img" src="" alt="MetaTrader 5"> -->
+        </div>
+        <div class="tarea-divider"></div>
+        <span class="pasos-label">Qué hacer</span>
+        <ol class="pasos">
+          <li>Descarga MetaTrader 5 (celular o computadora)</li>
+          <li>Crea una cuenta demostrativa en Taurex</li>
+          <li>Ve el video de capacitación en JifuLive</li>
+          <li>Practica navegando la plataforma en modo demo</li>
+        </ol>
+        <div class="tarea-nota">✏️ Ten papel y pluma. No confíes en la memoria para los conceptos nuevos.</div>
+        <label class="tarea-check-area" onclick="marcarTarea(3)">
+          <div class="checkbox-custom" id="check-3"></div>
+          <span class="check-label">Marcar como completada</span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     FASE 2 — CONSTRUYE LA BASE (dark)
+═══════════════════════════════════════════════════════════════════ -->
+<div class="fase-wrap dark">
+  <div class="fase-inner">
+    <div class="fase-header">
+      <span class="fase-num">Fase 02</span>
+      <h2 class="fase-titulo">Construye la base</h2>
+      <div class="fase-linea"></div>
+    </div>
+    <div class="tareas-grid">
+
+      <!-- TAREA 4 -->
+      <div class="tarea" id="tarea-4">
+        <div class="tarea-top">
+          <span class="tarea-num-badge">Tarea 04</span>
+          <span class="tarea-tiempo">1–2 horas</span>
+        </div>
+        <div class="tarea-icono">📖</div>
+        <div class="tarea-titulo">Glosario de Términos & Manual Operativo</div>
+        <div class="tarea-hook">"El que no conoce el lenguaje del mercado, paga por aprenderlo."</div>
+        <div class="tarea-porque">Este documento cierra las brechas que el intensivo deja abiertas. No es opcional. Al final tiene 3 preguntas que debes responder y enviar a tu líder — ese paso confirma que entiendes los fundamentos.</div>
+        <div class="tarea-divider"></div>
+        <span class="pasos-label">Qué hacer</span>
+        <ol class="pasos">
+          <li>Descarga el documento desde Google Drive</li>
+          <li>Léelo completo — no lo escanees</li>
+          <li>Responde las 3 preguntas del final</li>
+          <li>Envía tus respuestas a tu líder referente</li>
+        </ol>
+        <a class="tarea-link" href="https://drive.google.com/file/d/1H2npMKU7mheqdeY9Z9N5LaU8jm__VIPK/view?usp=sharing" target="_blank">↗ Descargar Glosario & Manual</a>
+        <label class="tarea-check-area" onclick="marcarTarea(4)">
+          <div class="checkbox-custom" id="check-4"></div>
+          <span class="check-label">Marcar como completada</span>
+        </label>
+      </div>
+
+      <!-- TAREA 5 -->
+      <div class="tarea" id="tarea-5">
+        <div class="tarea-top">
+          <span class="tarea-num-badge">Tarea 05</span>
+          <span class="tarea-tiempo">2 horas</span>
+        </div>
+        <div class="tarea-icono">🛡️</div>
+        <div class="tarea-titulo">Gestión de Riesgo</div>
+        <div class="tarea-hook">"Los traders que duran aprenden a no perder antes de aprender a ganar."</div>
+        <div class="tarea-porque">La mayoría pierde dinero no por falta de estrategia, sino por falta de control. Esta capacitación te enseña a proteger tu capital antes de exponerlo. Es el seguro de vida de tu cuenta.</div>
+        <div class="tarea-divider"></div>
+        <span class="pasos-label">Qué hacer</span>
+        <ol class="pasos">
+          <li>Ve el video de gestión de riesgo en JifuLive</li>
+          <li>Toma apuntes detallados — no lo veas como si fuera Netflix</li>
+          <li>Aplica lo aprendido en tu cuenta demo antes de pasar</li>
+        </ol>
+        <div class="tarea-nota">✏️ Esta tarea requiere cuaderno. Los conceptos son densos y se olvidan.</div>
+        <label class="tarea-check-area" onclick="marcarTarea(5)">
+          <div class="checkbox-custom" id="check-5"></div>
+          <span class="check-label">Marcar como completada</span>
+        </label>
+      </div>
+
+      <!-- TAREA 6 -->
+      <div class="tarea" id="tarea-6">
+        <div class="tarea-top">
+          <span class="tarea-num-badge">Tarea 06</span>
+          <span class="tarea-tiempo">1 hora</span>
+        </div>
+        <div class="tarea-icono">🎯</div>
+        <div class="tarea-titulo">Aprende a Colocar Entradas</div>
+        <div class="tarea-hook">"Saber cuándo entrar es la mitad de la batalla. Saber cómo ejecutarlo es la otra."</div>
+        <div class="tarea-porque">Puedes tener la mejor estrategia del mundo y arruinarla con una mala ejecución. Este video te muestra la mecánica exacta para colocar órdenes en MT5 sin errores.</div>
+        <div class="tarea-divider"></div>
+        <span class="pasos-label">Qué hacer</span>
+        <ol class="pasos">
+          <li>Ve el video de colocación de entradas en JifuLive</li>
+          <li>Abre MT5 en paralelo y practica cada paso en demo</li>
+          <li>Coloca al menos 3 órdenes de práctica antes de continuar</li>
+        </ol>
+        <label class="tarea-check-area" onclick="marcarTarea(6)">
+          <div class="checkbox-custom" id="check-6"></div>
+          <span class="check-label">Marcar como completada</span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     FASE 3 — PROGRAMA TU MENTE
+═══════════════════════════════════════════════════════════════════ -->
+<div class="fase-wrap">
+  <div class="fase-inner">
+    <div class="fase-header">
+      <span class="fase-num">Fase 03</span>
+      <h2 class="fase-titulo">Programa tu mente</h2>
+      <div class="fase-linea"></div>
+    </div>
+    <div class="tareas-grid">
+
+      <!-- TAREA 7 -->
+      <div class="tarea" id="tarea-7">
+        <div class="tarea-top">
+          <span class="tarea-num-badge">Tarea 07</span>
+          <span class="tarea-tiempo">30 días continuos</span>
+        </div>
+        <div class="tarea-icono">🧠</div>
+        <div class="tarea-titulo">Mentalidad y Objetivos</div>
+        <div class="tarea-hook">"Tu cuenta bancaria nunca va a crecer más allá de lo que tu mente le permita."</div>
+        <div class="tarea-porque">El trading sin mentalidad correcta es ruleta rusa. Esta fase instala los principios que separan a los que sobreviven en el mercado de los que se rinden en los primeros tres meses.</div>
+        <div class="tarea-divider"></div>
+        <div class="pasos-grupo">
+          <span class="pasos-grupo-label">📻 IVOOX — Audiolibro</span>
+          <ol class="pasos">
+            <li>Descarga la app IVOOX</li>
+            <li>Busca: "Audiolibro – Padre Rico Padre Pobre"</li>
+            <li>Escúchalo completo durante los primeros 30 días</li>
+          </ol>
+        </div>
+        <div class="pasos-grupo">
+          <span class="pasos-grupo-label">🎙️ MIXLR — Comunidad en vivo</span>
+          <ol class="pasos">
+            <li>Descarga MIXLR y crea tu cuenta</li>
+            <li>Sigue el canal: <strong>Retired Young</strong></li>
+            <li>Conéctate: lunes a sábado, 11:00 a.m. (Ecuador)</li>
+          </ol>
+        </div>
+        <label class="tarea-check-area" onclick="marcarTarea(7)">
+          <div class="checkbox-custom" id="check-7"></div>
+          <span class="check-label">Marcar como iniciada</span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     FASE 4 — DOMINA LA ESTRATEGIA (dark)
+═══════════════════════════════════════════════════════════════════ -->
+<div class="fase-wrap dark">
+  <div class="fase-inner">
+    <div class="fase-header">
+      <span class="fase-num">Fase 04</span>
+      <h2 class="fase-titulo">Domina la estrategia</h2>
+      <div class="fase-linea"></div>
+    </div>
+    <div class="tareas-grid">
+
+      <!-- TAREA 8 -->
+      <div class="tarea" id="tarea-8">
+        <div class="tarea-top">
+          <span class="tarea-num-badge">Tarea 08</span>
+          <span class="tarea-tiempo">6 días de estudio</span>
+        </div>
+        <div class="tarea-icono">📈</div>
+        <div class="tarea-titulo">Estrategia ORB</div>
+        <div class="tarea-hook">"Esta es la estrategia que usa la comunidad. Aquí todo empieza a tener sentido."</div>
+        <div class="tarea-porque">ORB (Opening Range Breakout) es el núcleo de la operativa JIFU. Es simple, repetible y probada. Seis días de estudio intensivo, con práctica en demo simultánea. No avances hasta que puedas explicarla con tus propias palabras.</div>
+        <div class="tarea-divider"></div>
+        <span class="pasos-label">Ritmo de estudio sugerido</span>
+        <ol class="pasos">
+          <li>Día 1: ORB 1 + Fundamentos</li>
+          <li>Día 2: ORB 2 — inicia operativa en cuenta DEMO</li>
+          <li>Día 3: Teoría de Cuartos</li>
+          <li>Día 4: ORB 3</li>
+          <li>Día 5: ORB 4</li>
+          <li>Día 6: ORB 5 — revisión completa</li>
+        </ol>
+        <div class="tarea-nota">📓 Cuaderno obligatorio. Elimina el celular como distracción. Revisa el material más de una vez.</div>
+        <label class="tarea-check-area" onclick="marcarTarea(8)">
+          <div class="checkbox-custom" id="check-8"></div>
+          <span class="check-label">Marcar como completada</span>
+        </label>
+      </div>
+
+      <!-- TAREA 9 -->
+      <div class="tarea" id="tarea-9">
+        <div class="tarea-top">
+          <span class="tarea-num-badge">Tarea 09</span>
+          <span class="tarea-tiempo">2–3 horas</span>
+        </div>
+        <div class="tarea-icono">⚡</div>
+        <div class="tarea-titulo">Fundamentos para Operar con JONA</div>
+        <div class="tarea-hook">"La teoría sin ejecución no vale nada. Aquí pones todo en práctica."</div>
+        <div class="tarea-porque">Videos cortos, directos al punto. JONA te muestra cómo ejecutar operaciones paso a paso en situaciones reales. Aplicación práctica inmediata de lo que aprendiste en ORB.</div>
+        <div class="tarea-divider"></div>
+        <span class="pasos-label">Qué hacer</span>
+        <ol class="pasos">
+          <li>Accede a la serie de videos de JONA en JifuLive</li>
+          <li>Ve cada video con MT5 abierto en paralelo</li>
+          <li>Replica cada operación en tu cuenta demo</li>
+        </ol>
+        <div class="tarea-nota">⚠️ <strong>Omite</strong> el video de cálculo de riesgo de esta sección — ya lo viste en la Tarea 05.</div>
+        <label class="tarea-check-area" onclick="marcarTarea(9)">
+          <div class="checkbox-custom" id="check-9"></div>
+          <span class="check-label">Marcar como completada</span>
+        </label>
+      </div>
+
+      <!-- TAREA 10 -->
+      <div class="tarea" id="tarea-10">
+        <div class="tarea-top">
+          <span class="tarea-num-badge">Tarea 10</span>
+          <span class="tarea-tiempo">2–3 horas</span>
+        </div>
+        <div class="tarea-icono">🏆</div>
+        <div class="tarea-titulo">Teoría de Cuartos</div>
+        <div class="tarea-hook">"El oro no miente. Aprende a leerlo y tendrás una ventaja que muy pocos tienen."</div>
+        <div class="tarea-porque">La Teoría de Cuartos te enseña a leer la estructura del precio — especialmente en oro (XAUUSD). Desarrolla el criterio para identificar zonas clave antes de que el mercado llegue a ellas.</div>
+        <div class="tarea-divider"></div>
+        <span class="pasos-label">Qué hacer</span>
+        <ol class="pasos">
+          <li>Ve el módulo de Teoría de Cuartos en JifuLive</li>
+          <li>Practica identificando cuartos en gráficos históricos</li>
+          <li>Aplica la teoría en XAUUSD en tu cuenta demo</li>
+        </ol>
+        <label class="tarea-check-area" onclick="marcarTarea(10)">
+          <div class="checkbox-custom" id="check-10"></div>
+          <span class="check-label">Marcar como completada</span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     FASE 5 — COMPLETA EL ECOSISTEMA
+═══════════════════════════════════════════════════════════════════ -->
+<div class="fase-wrap">
+  <div class="fase-inner">
+    <div class="fase-header">
+      <span class="fase-num">Fase 05</span>
+      <h2 class="fase-titulo">Completa el ecosistema</h2>
+      <div class="fase-linea"></div>
+    </div>
+    <div class="tareas-grid">
+
+      <!-- TAREA 11 -->
+      <div class="tarea" id="tarea-11">
+        <div class="tarea-top">
+          <span class="tarea-num-badge">Tarea 11</span>
+          <span class="tarea-tiempo">30 min</span>
+        </div>
+        <div class="tarea-icono">₿</div>
+        <div class="tarea-titulo">Instala Binance</div>
+        <div class="tarea-hook">"El dinero del futuro ya llegó. Necesitas saber manejarlo."</div>
+        <div class="tarea-porque">Binance es la puerta de entrada al ecosistema de pagos en criptomonedas que usa JIFU. Tus ganancias viajan por aquí. Más vale conocerla ahora que aprenderla bajo presión.</div>
+        <div class="tarea-divider"></div>
+        <span class="pasos-label">Qué hacer</span>
+        <ol class="pasos">
+          <li>Descarga Binance (App Store o Google Play)</li>
+          <li>Crea y verifica tu cuenta</li>
+          <li>Familiarízate con la interfaz antes de necesitarla</li>
+        </ol>
+        <label class="tarea-check-area" onclick="marcarTarea(11)">
+          <div class="checkbox-custom" id="check-11"></div>
+          <span class="check-label">Marcar como completada</span>
+        </label>
+      </div>
+
+      <!-- TAREA 12 -->
+      <div class="tarea" id="tarea-12">
+        <div class="tarea-top">
+          <span class="tarea-num-badge">Tarea 12</span>
+          <span class="tarea-tiempo">30 min</span>
+        </div>
+        <div class="tarea-icono">💳</div>
+        <div class="tarea-titulo">Instala UglyCash</div>
+        <div class="tarea-hook">"La última pieza del sistema. Ahora sí estás listo."</div>
+        <div class="tarea-porque">UglyCash cierra el círculo del ecosistema de pagos JIFU. Con esta app instalada y configurada, tienes todo lo que necesitas para operar, cobrar y crecer dentro del sistema.</div>
+        <div class="tarea-divider"></div>
+        <span class="pasos-label">Qué hacer</span>
+        <ol class="pasos">
+          <li>Descarga UglyCash en tu celular</li>
+          <li>Crea tu cuenta y configúrala</li>
+          <li>Vincula con tu perfil JIFU según las instrucciones de tu líder</li>
+        </ol>
+        <label class="tarea-check-area" onclick="marcarTarea(12)">
+          <div class="checkbox-custom" id="check-12"></div>
+          <span class="check-label">¡Marcar como completada — lo lograste!</span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── CIERRE ──────────────────────────────────────────────────────── -->
+<div class="cierre">
+  <div class="cierre-inner">
+    <div class="cierre-eyebrow">johnnyfxec · JIFU Trading · 2026</div>
+    <div class="cierre-title">Tu primer<br>paso empieza<br><span>ahora.</span></div>
+    <div class="cierre-sub">No esperes el momento perfecto. No existe. Empieza con la Tarea 01, complétala, y deja que el proceso haga el resto.</div>
+    <div class="cierre-marca">johnnyfxec · Ecuador · jifulive.com</div>
+  </div>
+</div>
+
+<script>
+  window.addEventListener('load', function() {
+    for (let i = 1; i <= 12; i++) {
+      if (localStorage.getItem('tarea-' + i) === 'completada') {
+        aplicarCompletada(i);
+      }
+    }
+    actualizarBarra();
+  });
+
+  function marcarTarea(n) {
+    if (localStorage.getItem('tarea-' + n) === 'completada') {
+      localStorage.removeItem('tarea-' + n);
+      quitarCompletada(n);
+    } else {
+      localStorage.setItem('tarea-' + n, 'completada');
+      aplicarCompletada(n);
+    }
+    actualizarBarra();
+  }
+
+  function aplicarCompletada(n) {
+    document.getElementById('tarea-' + n).classList.add('completada');
+    document.getElementById('check-' + n).classList.add('marcado');
+  }
+
+  function quitarCompletada(n) {
+    document.getElementById('tarea-' + n).classList.remove('completada');
+    document.getElementById('check-' + n).classList.remove('marcado');
+  }
+
+  function actualizarBarra() {
+    let completadas = 0;
+    for (let i = 1; i <= 12; i++) {
+      if (localStorage.getItem('tarea-' + i) === 'completada') completadas++;
+    }
+    document.getElementById('barra').style.width = (completadas / 12 * 100) + '%';
+    document.getElementById('contador').textContent = completadas + ' / 12';
+  }
+</script>
+
+</body>
+</html>
