@@ -4,3 +4,6 @@
 *.sh
 *.log
 __pycache__/
+# Imágenes sí se incluyen
+!images/
+!images/**
