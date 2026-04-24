@@ -628,6 +628,99 @@
       .tarea-descripcion { font-size: 0.9rem; }
       .paso { font-size: 0.9rem; }
     }
+
+    /* ---- Tarea 3: MT5 logo y GIF responsivos ---- */
+    .mt5-logo {
+      display: block;
+      margin: 0 auto 12px;
+      width: auto;
+      max-width: 100px;
+      object-fit: contain;
+    }
+
+    .mt5-gif {
+      display: block;
+      margin: 12px auto 0;
+      width: 100%;
+      max-width: 100%;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    @media (min-width: 601px) {
+      .mt5-gif {
+        width: auto;
+        max-height: 65vh;
+        max-width: 100%;
+      }
+    }
+
+    /* ---- Tarea 7: layout tabla 2×2 apps ---- */
+    .apps-tabla {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .app-fila {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: var(--color-borde);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 0;
+    }
+
+    .app-fila-contenido {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .app-fila-logo {
+      width: 70px;
+      height: auto;
+      flex-shrink: 0;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+
+    @media (max-width: 600px) {
+      .app-fila {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .app-fila-logo {
+        width: 56px;
+      }
+    }
+
+    /* ---- Tarea 8: checkbox sutil por día ---- */
+    .pasos-dias li {
+      justify-content: space-between;
+    }
+
+    .dia-check {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 15px;
+      height: 15px;
+      min-width: 15px;
+      border: 2px solid var(--color-texto-suave);
+      border-radius: 3px;
+      cursor: pointer;
+      margin-left: 10px;
+      align-self: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .dia-check:checked {
+      background: var(--color-oro);
+      border-color: var(--color-oro);
+    }
   </style>
 </head>
 
@@ -806,8 +899,8 @@
           </div>
 
           <div class="tarea-media">
-            <img class="tarea-img" src="images/mt5-logo.png" alt="MetaTrader 5 MT5" style="max-width:180px;">
-            <img class="tarea-img" src="images/mt5-descarga.gif" alt="Cómo descargar MetaTrader 5" style="margin-top:16px;">
+            <img class="mt5-logo" src="images/mt5-logo.png" alt="MetaTrader 5 MT5">
+            <img class="mt5-gif" src="images/mt5-descarga.gif" alt="Cómo descargar MetaTrader 5">
             <div class="tarea-video-wrapper" style="margin-top:16px;">
               <iframe src="https://www.youtube.com/embed/bmfqk0ZwKeA" allowfullscreen loading="lazy"></iframe>
             </div>
@@ -987,24 +1080,30 @@
 
           <div class="tarea-divider"></div>
 
-          <div class="pasos-grupo">
-            <img src="images/ivoox-logo.webp" alt="Ivoox" style="height:40px;margin-bottom:10px;">
-            <span class="pasos-grupo-label">📻 IVOOX — Audiolibro</span>
-            <ol class="pasos">
-              <li>Descarga la app IVOOX</li>
-              <li>Busca: "Audiolibro – Padre Rico Padre Pobre"</li>
-              <li>Escúchalo completo durante los primeros 30 días</li>
-            </ol>
-          </div>
+          <div class="apps-tabla">
+            <div class="app-fila pasos-grupo">
+              <div class="app-fila-contenido">
+                <span class="pasos-grupo-label">📻 IVOOX — Audiolibro</span>
+                <ol class="pasos">
+                  <li>Descarga la app IVOOX</li>
+                  <li>Busca: "Audiolibro – Padre Rico Padre Pobre"</li>
+                  <li>Escúchalo completo durante los primeros 30 días</li>
+                </ol>
+              </div>
+              <img src="images/ivoox-logo.webp" alt="Ivoox" class="app-fila-logo">
+            </div>
 
-          <div class="pasos-grupo">
-            <img src="images/mixlr-logo.webp" alt="Mixlr" style="height:40px;margin-bottom:10px;">
-            <span class="pasos-grupo-label">🎙️ MIXLR — Comunidad en vivo</span>
-            <ol class="pasos">
-              <li>Descarga la app MIXLR y crea tu cuenta</li>
-              <li>Sigue el canal: <strong>Retired Young</strong></li>
-              <li>Conéctate en vivo: lunes a sábado, 11:00 a.m. (Ecuador)</li>
-            </ol>
+            <div class="app-fila pasos-grupo">
+              <div class="app-fila-contenido">
+                <span class="pasos-grupo-label">🎙️ MIXLR — Comunidad en vivo</span>
+                <ol class="pasos">
+                  <li>Descarga la app MIXLR y crea tu cuenta</li>
+                  <li>Sigue el canal: <strong>Retired Young</strong></li>
+                  <li>Conéctate en vivo: lunes a sábado, 11:00 a.m. (Ecuador)</li>
+                </ol>
+              </div>
+              <img src="images/mixlr-logo.webp" alt="Mixlr" class="app-fila-logo">
+            </div>
           </div>
 
           <label class="tarea-check-area" onclick="marcarTarea(7)">
@@ -1046,13 +1145,13 @@
           </div>
 
           <p class="pasos-titulo">Ritmo de estudio sugerido</p>
-          <ol class="pasos">
-            <li>Día 1: ORB 1 + Fundamentos</li>
-            <li>Día 2: ORB 2 — inicia operativa en cuenta DEMO</li>
-            <li>Día 3: Teoría de Cuartos</li>
-            <li>Día 4: ORB 3</li>
-            <li>Día 5: ORB 4</li>
-            <li>Día 6: ORB 5 — revisión completa</li>
+          <ol class="pasos pasos-dias">
+            <li>Día 1: ORB 1 + Fundamentos<input type="checkbox" class="dia-check" id="orb-dia-1"></li>
+            <li>Día 2: ORB 2 — inicia operativa en cuenta DEMO<input type="checkbox" class="dia-check" id="orb-dia-2"></li>
+            <li>Día 3: Teoría de Cuartos<input type="checkbox" class="dia-check" id="orb-dia-3"></li>
+            <li>Día 4: ORB 3<input type="checkbox" class="dia-check" id="orb-dia-4"></li>
+            <li>Día 5: ORB 4<input type="checkbox" class="dia-check" id="orb-dia-5"></li>
+            <li>Día 6: ORB 5 — revisión completa<input type="checkbox" class="dia-check" id="orb-dia-6"></li>
           </ol>
 
           <div class="tarea-nota">
@@ -1271,6 +1370,15 @@
           aplicarCompletada(i); // Si estaba guardada, la marcamos visualmente
         }
       }
+
+      // Restaurar checkboxes de días ORB (Tarea 8)
+      document.querySelectorAll('.dia-check').forEach(function(cb) {
+        if (localStorage.getItem(cb.id) === 'checked') cb.checked = true;
+        cb.addEventListener('change', function() {
+          if (cb.checked) localStorage.setItem(cb.id, 'checked');
+          else localStorage.removeItem(cb.id);
+        });
+      });
       actualizarBarra(); // Actualizamos la barra de progreso con los datos guardados
     });
 
