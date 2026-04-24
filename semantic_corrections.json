@@ -1,0 +1,85 @@
+{
+  "_instrucciones": "Agrega nuevas correcciones en las listas correspondientes. Formato reemplazos: {\"de\": \"texto_incorrecto\", \"a\": \"texto_correcto\", \"nota\": \"opcional\"}. Los patrones de muletillas usan expresiones regulares de Python.",
+
+  "reemplazos": [
+    {"de": "GIFO",        "a": "JIFU",         "nota": "Error frecuente de Whisper con el nombre de la empresa"},
+    {"de": "Gifo",        "a": "JIFU"},
+    {"de": "gifo",        "a": "JIFU"},
+    {"de": "Jaifu",       "a": "JIFU"},
+    {"de": "Jaifo",       "a": "JIFU"},
+    {"de": "JI FU",       "a": "JIFU"},
+    {"de": "Ji Fu",       "a": "JIFU"},
+    {"de": "jifu",        "a": "JIFU"},
+    {"de": "Jifu",        "a": "JIFU"},
+
+    {"de": "jifu connect",  "a": "JIFU Connect",  "nota": "Nombre de la app de notificaciones"},
+    {"de": "Jifu Connect",  "a": "JIFU Connect"},
+    {"de": "jifu live",     "a": "JifuLive",      "nota": "Nombre de la plataforma educativa"},
+    {"de": "Jifu Live",     "a": "JifuLive"},
+    {"de": "jifu wallet",   "a": "JIFU Wallet",   "nota": "Billetera interna de JIFU"},
+    {"de": "Jifu Wallet",   "a": "JIFU Wallet"},
+    {"de": "jifu trading",  "a": "JIFU Trading"},
+
+    {"de": "meta trader",   "a": "MetaTrader",    "nota": "Plataforma de trading"},
+    {"de": "Meta Trader",   "a": "MetaTrader"},
+    {"de": "metatrader 5",  "a": "MetaTrader 5"},
+    {"de": "meta trader 5", "a": "MetaTrader 5"},
+    {"de": "MT 5",          "a": "MT5"},
+
+    {"de": "Jhonny",        "a": "Johnny",        "nota": "Error frecuente de Whisper con el nombre"},
+    {"de": "jhonny",        "a": "Johnny"},
+    {"de": "Jhony",         "a": "Johnny"},
+    {"de": "jhony",         "a": "Johnny"},
+
+    {"de": "taurex",        "a": "Taurex",        "nota": "Nombre del broker"},
+    {"de": "TAUREX",        "a": "Taurex"},
+
+    {"de": "Reprofit",      "a": "REPROFIT",      "nota": "Nombre del sistema de copia de trading"},
+    {"de": "reprofit",      "a": "REPROFIT"},
+
+    {"de": "ugly cash",     "a": "UglyCash",      "nota": "App de pagos del ecosistema JIFU"},
+    {"de": "Ugly Cash",     "a": "UglyCash"},
+    {"de": "uglycash",      "a": "UglyCash"},
+
+    {"de": "trading view",  "a": "TradingView",   "nota": "Plataforma de gráficos"},
+    {"de": "Trading View",  "a": "TradingView"},
+
+    {"de": "Retired Young", "a": "Retired Young", "nota": "Canal de Mixlr — mantener capitalización correcta"},
+    {"de": "retired young", "a": "Retired Young"},
+
+    {"de": "ORB",           "a": "ORB",           "nota": "Opening Range Breakout — ya correcto, confirmar mayúsculas"},
+    {"de": "orb",           "a": "ORB"},
+    {"de": "Orb",           "a": "ORB"},
+
+    {"de": "VWAP",          "a": "VWAP"},
+    {"de": "vwap",          "a": "VWAP"},
+    {"de": "Vwap",          "a": "VWAP"},
+
+    {"de": "xauusd",        "a": "XAUUSD",        "nota": "Par de oro/dólar"},
+    {"de": "Xauusd",        "a": "XAUUSD"},
+
+    {"de": "binance",       "a": "Binance",       "nota": "Exchange de criptomonedas"},
+    {"de": "BINANCE",       "a": "Binance"},
+
+    {"de": "ivoox",         "a": "iVoox",         "nota": "App de audiolibros"},
+    {"de": "Ivoox",         "a": "iVoox"},
+    {"de": "IVOOX",         "a": "iVoox"},
+
+    {"de": "mixlr",         "a": "Mixlr"},
+    {"de": "MIXLR",         "a": "Mixlr"}
+  ],
+
+  "muletillas": [
+    "\\beh,\\s+",
+    "\\beh\\.\\s+",
+    "\\bum,\\s+",
+    "\\bum\\.\\s+",
+    "\\bmmm+,?\\s+",
+    "\\beste este\\b",
+    "\\bo sea o sea\\b",
+    "\\bno no no\\b",
+    "\\bsí sí sí\\b",
+    "\\bbueno bueno\\b",
+    "\\bpues pues\\b"
+  ]
+}

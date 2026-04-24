@@ -1,9 +1,23 @@
-*.json
+# ── Datos privados y transcripciones ──────────────────────────
 *.txt
+*.log
+*.pickle
+cookies.txt
+youtube_cookies.txt
+credentials.json
+token.pickle
+
+# ── Archivos generados por el pipeline ────────────────────────
+jifu_knowledge_base.md
+processed_files.log
+backups/
+__pycache__/
+
+# ── Scripts del pipeline (privados, no parte del sitio) ───────
 *.py
 *.sh
-*.log
-__pycache__/
-# Imágenes sí se incluyen
+
+# ── Excepciones: archivos que SÍ se versionan ─────────────────
 !images/
 !images/**
+!semantic_corrections.json
